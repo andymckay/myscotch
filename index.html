@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"
+          href="static/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css"
+          href="static/bootstrap/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/site.css" />
+    <script src="static/jquery/jquery-1.7.2.min.js"></script>
+    <script src="static/js/receipts.js"></script>
+    <script src="static/js/site.js"></script>
+    <title>My Scotch</title>
+  </head>
+  <body>
+    <header>
+      <section class="container">
+      <h2>My Scotch</h2>
+      </section>
+    </header>
+
+    <section class="container" id="scotch-edit">
+      <form class="form-vertical">
+        <input name="scotch" value="" placeholder="Your scotch..."><br/>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </section>
+
+    <section class="container" id="scotch-show">
+      <h3>None selected.</h3>
+      <button type="submit" class="btn btn-primary">Edit</button>
+    </section>
+
+    <section class="container" id="receipt-problem">
+      <p><strong>Oh dear!</strong></p>
+      <p>There was a problem with your receipt. We don't have a valid receipt for your client.</p>
+    </section>
+
+    <section class="container">
+      <p>Client receipts: <span id="receipts"></span>
+        <a id="delete" href="#">Delete all receipts</a>
+      </p>
+    </section>
+
+    <footer>
+      <section class="container">
+        <p>My Scotch is a place to record your scotch. This is an app to demonstrate
+           how to use Web App receipts and integrate with the
+           <a href="http://marketplace.mozilla.org">Mozilla Marketplace</a>.</p>
+      </section>
+    </footer>
+  </body>
+</html>
+
+

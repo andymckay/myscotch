@@ -1,0 +1,40 @@
+header {
+    background: url('static/img/grain.png') repeat scroll 0% 0% rgb(57, 76, 88);
+    font-family: Palatino Linotype, Book Antiqua3, Palatino, serif;
+    width: 100%;
+}
+
+h2 {
+    color: white;
+}
+
+h2, h3 {
+    font-family: Palatino Linotype, Book Antiqua3, Palatino, serif;
+}
+
+body {
+    background: url('static/img/grain.png') repeat scroll 0% 0% rgb(222, 227, 230);
+}
+
+p, section {
+    font-family: DroidSans, sans serif;
+}
+
+section {
+    padding: 1em;
+    display: none;
+}
+
+header > section, footer > section {
+    display: block;
+}
+
+@font-face {
+    font-family: DroidSans;
+    src: url('../fonts/DroidSans.ttf') format("truetype");
+}
+
+footer {
+    border-top: 1px solid black;
+    width: 100%;
+}
