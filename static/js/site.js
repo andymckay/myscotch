@@ -19,7 +19,7 @@ $(document).ready(function() {
     });
 
     $(show).find('button').bind('click', function(e) {
-        edit.toggle();
+        edit.toggle().find('input').val(window.localStorage.getItem(storage));
         show.toggle();
     });
 
