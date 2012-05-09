@@ -33,17 +33,29 @@ $(document).ready(function() {
         req.onsuccess = function(o) {
             $.each(req.result._receipts, function(index, value) {
                 list.find('dl')
-                    .append('<dt>' + value.substring(0, 10) + '...</dl>');
+                    .append('<dt data-receipt="' + value + '">'
+                            + value.substring(0, 10) + '...</dt>')
+                    .append('<dd>' + receipt_json(value) + '</dd>');
                 list.find('button').removeClass('hidden');
             });
         };
     };
+
+    var receipt_json = function(receipt) {
+        if (receipt.indexOf('~') > -1) {
+            receipt = receipt.split('~')[1];
+        }
+        receipt = receipt.split('.')[1];
+        return JSON.stringify(jwt.base64urldecode(receipt));
+    }
 
     var receipt_uninstall = function(e) {
         var req = window.navigator.mozApps.getSelf();
 
         req.onsuccess = function(o) {
             req.result.uninstall();
+
+            /* TODO: find out why there is a delay here */
             list.find('button').addClass('hidden');
             receipt_list();
         };
