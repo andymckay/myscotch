@@ -1,9 +1,9 @@
 {
     "name": "MyScotch",
-    "description": "Example app with receipts to track your scotch',
+    "description": "Example app with receipts to track your scotch",
     "icons": {
-        "128": "/static/img/scotch.jpg",
+        "128": "/static/img/scotch.jpg"
     },
     "locales": {},
-    "default_locale": "en-US",
+    "default_locale": "en-US"
 }
