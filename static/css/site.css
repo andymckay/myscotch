@@ -24,10 +24,6 @@ section {
     padding: 1em;
 }
 
-section.hidden {
-    display: none;
-}
-
 section #receipts-list span {
     font-weight: bold;
 }
