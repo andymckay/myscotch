@@ -1,7 +1,9 @@
 $(document).ready(function() {
+    /* The code to change stuff. */
     var storage = 'scotch',
         edit = $('#scotch-edit'),
         show = $('#scotch-show'),
+        list = $('#receipt-list'),
         current = window.localStorage.getItem(storage);
 
     if (!current) {
@@ -23,5 +25,30 @@ $(document).ready(function() {
         show.toggle();
     });
 
+    /* Sample receipt handling code. */
+    var receipt_list = function() {
+        list.find('span').innerHTML = '';
+        var req = window.navigator.mozApps.getSelf();
 
+        req.onsuccess = function(o) {
+            $.each(req.result._receipts, function(index, value) {
+                list.find('span')
+                    .append('<span>' + value.substring(0, 10) + '...</span>');
+                list.find('a').show();
+            });
+        };
+    };
+
+    var receipt_uninstall = function(e) {
+        var req = window.navigator.mozApps.getSelf();
+
+        req.onsuccess = function(o) {
+            req.result.uninstall();
+            receipt_list();
+        };
+    };
+
+    list.find('a').bind('click', receipt_uninstall);
+    /* Populate the receipt list. */
+    receipt_list();
 });

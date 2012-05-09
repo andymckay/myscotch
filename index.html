@@ -20,26 +20,27 @@
       </section>
     </header>
 
-    <section class="container" id="scotch-edit">
+    <section class="container hidden" id="scotch-edit">
       <form class="form-vertical">
         <input name="scotch" value="" placeholder="Your scotch..."><br/>
         <button type="submit" class="btn btn-success">Save</button>
       </form>
     </section>
 
-    <section class="container" id="scotch-show">
+    <section class="container hidden" id="scotch-show">
       <h3>None selected.</h3>
       <button type="submit" class="btn btn-primary">Edit</button>
     </section>
 
-    <section class="container" id="receipt-problem">
+    <section class="container hidden" id="receipt-problem">
       <p><strong>Oh dear!</strong></p>
       <p>There was a problem with your receipt. We don't have a valid receipt for your client.</p>
     </section>
 
-    <section class="container">
-      <p>Client receipts: <span id="receipts"></span>
-        <a id="delete" href="#">Delete all receipts</a>
+    <section class="container" id="receipt-list">
+      <p>
+        Receipts <span></span><br>
+        <a href="#" class="btn btn-warning hidden">Uninstall</a>
       </p>
     </section>
 

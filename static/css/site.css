@@ -22,11 +22,14 @@ p, section {
 
 section {
     padding: 1em;
+}
+
+section.hidden {
     display: none;
 }
 
-header > section, footer > section {
-    display: block;
+section #receipts-list span {
+    font-weight: bold;
 }
 
 @font-face {
