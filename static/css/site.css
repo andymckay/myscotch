@@ -20,6 +20,25 @@ p, section {
     font-family: DroidSans, sans serif;
 }
 
+span.invalid, span.error, span.refunded {
+    color: firebrick;
+    font-weight: strong;
+}
+
+span.ok {
+    color: green;
+}
+
+span.expired, span.pending {
+    color: orange;
+}
+
+span.unknown {
+    color: grey;
+    font-weight: strong;
+
+}
+
 section {
     padding: 1em;
 }
