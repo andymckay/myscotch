@@ -1,5 +1,5 @@
 header {
-    background: url('static/img/grain.png') repeat scroll 0% 0% rgb(57, 76, 88);
+    background: url('grain.png') repeat scroll 0% 0% rgb(57, 76, 88);
     font-family: Palatino Linotype, Book Antiqua3, Palatino, serif;
     width: 100%;
 }
@@ -13,7 +13,7 @@ h2, h3 {
 }
 
 body {
-    background: url('static/img/grain.png') repeat scroll 0% 0% rgb(222, 227, 230);
+    background: url('grain.png') repeat scroll 0% 0% rgb(222, 227, 230);
 }
 
 p, section {
@@ -49,7 +49,7 @@ section #receipts-list span {
 
 @font-face {
     font-family: DroidSans;
-    src: url('../fonts/DroidSans.ttf') format("truetype");
+    src: url('DroidSans.ttf') format("truetype");
 }
 
 footer {
