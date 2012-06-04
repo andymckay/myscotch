@@ -30,12 +30,26 @@ $(document).ready(function() {
         list.find('dl').innerHTML = '';
         var req = window.navigator.mozApps.getSelf();
 
+
+
         req.onsuccess = function(o) {
             $.each(req.result._receipts, function(index, value) {
+                var parsed = receipt_json(value);
+                // TODO: turn this into a template.
                 list.find('dl')
                     .append('<dt data-receipt="' + value + '">'
-                            + value.substring(0, 10) + '...</dt>')
-                    .append('<dd>' + receipt_json(value) + '</dd>');
+                            + value.substring(0, 10) + '...</dt>'
+                            + '<dd>'
+                            + '<a href="#" class="verify" data-url="' + parsed.verify + '">'
+                            + 'Naive verification</a> &middot; '
+                            + 'status: <span class="status unknown">unknown</span> '
+                            + '</dd>'
+                            + '<dd>'
+                            + '<a href="#" class="verify" data-url="http://django-receipts.herokuapp.com/receipts/receive">'
+                            + 'Proxy verification</a> &middot; '
+                            + 'status: <span class="status unknown">unknown</span> '
+                            + '</dd>'
+                            );
                 list.find('button').removeClass('hidden');
             });
         };
@@ -46,22 +60,23 @@ $(document).ready(function() {
             receipt = receipt.split('~')[1];
         }
         receipt = receipt.split('.')[1];
-        return JSON.stringify(jwt.base64urldecode(receipt));
-    }
-
-    var receipt_uninstall = function(e) {
-        var req = window.navigator.mozApps.getSelf();
-
-        req.onsuccess = function(o) {
-            req.result.uninstall();
-
-            /* TODO: find out why there is a delay here */
-            list.find('button').addClass('hidden');
-            receipt_list();
-        };
+        return JSON.parse(atob(receipt));
     };
 
-    list.find('button').bind('click', receipt_uninstall);
+    var receipt_verify = function(e) {
+        var $this = $(this);
+        var $dt = $(this).parent().prevAll('dt:last');
+        $.post($this.data('url'),
+            $dt.data('receipt'),
+            function(data) {
+                $('span', $this.parent()).text(data.status)
+                               .removeClass()
+                               .addClass(data.status);
+            }, 'json');
+        return false;
+    };
+
+    $('a.verify').live('click', receipt_verify);
     /* Populate the receipt list. */
     receipt_list();
 });
