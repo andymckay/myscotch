@@ -30,10 +30,8 @@ $(document).ready(function() {
         list.find('dl').innerHTML = '';
         var req = window.navigator.mozApps.getSelf();
 
-
-
         req.onsuccess = function(o) {
-            $.each(req.result._receipts, function(index, value) {
+            $.each(req.result.receipts, function(index, value) {
                 var parsed = receipt_json(value);
                 // TODO: turn this into a template.
                 list.find('dl')
