@@ -92,9 +92,15 @@ $(document).ready(function() {
         var $this = $(this);
         mozmarket.receipts.verify(
             function(result) {
-                $('span', $this.parent()).text(result.state)
+                if (result.state instanceof verifier.states.OK) {
+                    $('span', $this.parent()).text('ok')
                                .removeClass()
-                               .addClass(result.state);
+                               .addClass('ok');
+                } else {
+                    $('span', $this.parent()).text('error ' + result.state)
+                               .removeClass()
+                               .addClass('invalid');
+                }
         });
     };
 
