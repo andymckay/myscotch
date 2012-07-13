@@ -30,7 +30,16 @@ $(document).ready(function() {
         list.find('dl').innerHTML = '';
         var req = window.navigator.mozApps.getSelf();
 
+        req.onerror = function(o) {
+            list.find('dl').append('An error occured in mozApps.getSelf()');
+            return;
+        };
+
         req.onsuccess = function(o) {
+            if (req.result.receipts.length < 1) {
+                list.find('dl').append('No receipts found.');
+                return;
+            }
             $.each(req.result.receipts, function(index, value) {
                 var parsed = receipt_json(value);
                 // TODO: turn this into a template.
@@ -83,10 +92,9 @@ $(document).ready(function() {
         var $this = $(this);
         mozmarket.receipts.verify(
             function(result) {
-                alert(result.state);
                 $('span', $this.parent()).text(result.state)
                                .removeClass()
-                               .addClass(data.status);
+                               .addClass(result.state.toLowerCase());
         });
     };
 
