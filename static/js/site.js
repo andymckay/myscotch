@@ -82,8 +82,7 @@ $(document).ready(function() {
             $dt.data('receipt'),
             function(data) {
                 $('span', $this.parent()).text(data.status)
-                               .removeClass()
-                               .addClass(data.status);
+                           .removeClass().addClass(data.status);
             }, 'json');
         return false;
     };
@@ -92,14 +91,12 @@ $(document).ready(function() {
         var $this = $(this);
         mozmarket.receipts.verify(
             function(result) {
-                if (result.state instanceof verifier.states.OK) {
+                if (result.state instanceof result.states.OK) {
                     $('span', $this.parent()).text('ok')
-                               .removeClass()
-                               .addClass('ok');
+                               .removeClass().addClass('ok');
                 } else {
                     $('span', $this.parent()).text('error ' + result.state)
-                               .removeClass()
-                               .addClass('invalid');
+                               .removeClass().addClass('invalid');
                 }
         });
     };
