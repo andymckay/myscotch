@@ -80,7 +80,7 @@ $(document).ready(function() {
     };
 
     var mozmarket_verify = function(e) {
-        mozmarkets.receipts.verify(
+        mozmarket.receipts.verify(
             function(result) {
                 $('span', $this.parent()).text(result.state)
                                .removeClass()
