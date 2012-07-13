@@ -80,8 +80,10 @@ $(document).ready(function() {
     };
 
     var mozmarket_verify = function(e) {
+        var $this = $(this);
         mozmarket.receipts.verify(
             function(result) {
+                alert(result.state);
                 $('span', $this.parent()).text(result.state)
                                .removeClass()
                                .addClass(data.status);
