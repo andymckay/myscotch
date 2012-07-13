@@ -30,10 +30,17 @@ $(document).ready(function() {
         list.find('dl').innerHTML = '';
         var req = window.navigator.mozApps.getSelf();
 
-
+        req.onerror = function(o) {
+            list.find('dl').append('An error occured in mozApps.getSelf()');
+            return;
+        };
 
         req.onsuccess = function(o) {
-            $.each(req.result._receipts, function(index, value) {
+            if (req.result.receipts.length < 1) {
+                list.find('dl').append('No receipts found.');
+                return;
+            }
+            $.each(req.result.receipts, function(index, value) {
                 var parsed = receipt_json(value);
                 // TODO: turn this into a template.
                 list.find('dl')
@@ -47,6 +54,11 @@ $(document).ready(function() {
                             + '<dd>'
                             + '<a href="#" class="verify" data-url="http://django-receipts.herokuapp.com/receipts/receive">'
                             + 'Proxy verification</a> &middot; '
+                            + 'status: <span class="status unknown">unknown</span> '
+                            + '</dd>'
+                            + '<dd>'
+                            + '<a href="#" class="verify-mozmarket">'
+                            + 'Recommended verification</a> &middot; '
                             + 'status: <span class="status unknown">unknown</span> '
                             + '</dd>'
                             );
@@ -70,13 +82,27 @@ $(document).ready(function() {
             $dt.data('receipt'),
             function(data) {
                 $('span', $this.parent()).text(data.status)
-                               .removeClass()
-                               .addClass(data.status);
+                           .removeClass().addClass(data.status);
             }, 'json');
         return false;
     };
 
+    var mozmarket_verify = function(e) {
+        var $this = $(this);
+        mozmarket.receipts.verify(
+            function(result) {
+                if (result.state instanceof result.states.OK) {
+                    $('span', $this.parent()).text('ok')
+                               .removeClass().addClass('ok');
+                } else {
+                    $('span', $this.parent()).text('error ' + result.state)
+                               .removeClass().addClass('invalid');
+                }
+        });
+    };
+
     $('a.verify').live('click', receipt_verify);
+    $('a.verify-mozmarket').live('click', mozmarket_verify);
     /* Populate the receipt list. */
     receipt_list();
 });
