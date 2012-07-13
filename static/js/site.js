@@ -47,6 +47,11 @@ $(document).ready(function() {
                             + 'Proxy verification</a> &middot; '
                             + 'status: <span class="status unknown">unknown</span> '
                             + '</dd>'
+                            + '<dd>'
+                            + '<a href="#" class="verify-mozmarket">'
+                            + 'Recommended verification</a> &middot; '
+                            + 'status: <span class="status unknown">unknown</span> '
+                            + '</dd>'
                             );
                 list.find('button').removeClass('hidden');
             });
@@ -74,7 +79,17 @@ $(document).ready(function() {
         return false;
     };
 
+    var mozmarket_verify = function(e) {
+        mozmarkets.receipts.verify(
+            function(result) {
+                $('span', $this.parent()).text(result.state)
+                               .removeClass()
+                               .addClass(data.status);
+        });
+    };
+
     $('a.verify').live('click', receipt_verify);
+    $('a.verify-mozmarket').live('click', mozmarket_verify);
     /* Populate the receipt list. */
     receipt_list();
 });
